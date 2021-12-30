@@ -1,0 +1,17 @@
+<div class="ui one column grid container center aligned">
+  <div class="column">
+    <p id="logo">&#8377;{{title}}&#8377;</p>
+  </div>
+</div>
+<div class="ui fluid three item menu">
+  <a class="item" href="record"><i class="download icon"></i>Record</a>
+  <div class="ui simple dropdown item">
+    <i class="user icon"></i>User<i class="dropdown icon"></i>
+    <div class="menu">
+      <a class="item" href="detail"><i class="user circle icon"></i>User Details</a>
+      <a class="item"><i class="chart bar icon"></i>Statistics</a>
+      <a class="item" href="statement"><i class="file alternate icon"></i>Statement</a>
+    </div>
+  </div>
+  <a class="item" (click)="signOut()"><i class="power off icon"></i>Logout</a>
+</div>

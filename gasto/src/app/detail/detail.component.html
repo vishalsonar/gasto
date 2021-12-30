@@ -1,0 +1,21 @@
+<div class="ui container padding-2-percentage">
+  <div class="ui card centered fluid">
+    <div class="content">
+      <div class="header">User Details</div>
+    </div>
+    <div class="content">
+      <div class="ui one column grid container">
+        <div class="column">
+          <img src="{{ getCurrentUser().getDisplayImage() }}" class="ui small circular image">
+        </div>
+        <div class="column">
+          <h4 class="ui sub header">Name: {{ getCurrentUser().getDisplayName() }}</h4>
+          <h4 class="ui sub header">Email: {{ getCurrentUser().getEmail() }}</h4>
+          <h4 class="ui sub header">uid: {{ getCurrentUser().getUID() }}</h4>
+          <h4 class="ui sub header" [innerHTML]="getCurrentUser().getDislpayEmailVerifiedAsIcon()"></h4>
+          <h4 class="ui sub header">Phone Number: {{ getCurrentUser().getPhoneNumber() }}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
