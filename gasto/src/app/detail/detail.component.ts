@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { CurrentUser } from '../service/currentUser';
-import { Utility } from '../service/Utility';
+import { CurrentUser } from '../entity/currentUser';
+import { Utility } from '../service/utility';
 
 @Component({
   selector: 'app-detail',

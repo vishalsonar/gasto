@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithPopup, GoogleAuthProvider, signOut } from '@angular/fire/auth';
-import { CurrentUser } from './currentUser';
-import { Utility } from './Utility';
+import { CurrentUser } from '../entity/currentUser';
+import { Utility } from './utility';
 
 @Injectable({
   providedIn: 'root'

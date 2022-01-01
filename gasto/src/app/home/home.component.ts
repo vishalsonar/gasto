@@ -9,21 +9,23 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent {
 
-  title: string;
+  public title: string;
+  public nextPage: string;
   
   constructor(private authentication: AuthenticationService, private router: Router){
     this.title = "Gasto";
+    this.nextPage = "record";
   }
 
   loginOrSignUp() {
     if (this.authentication.getCurrentUser().getUID()){
-      this.router.navigate(['/record']);
+      this.router.navigate([this.nextPage]);
       return;
     }
     this.authentication.loginOrSignUp().then((result) => {
       const user = this.authentication.getCurrentUser();
       if (user) {
-        this.router.navigate(['record']);
+        this.router.navigate([this.nextPage]);
       } else {
         console.error("AppComponent :: loginOrSignUp :: Error occured while fetching user info after login");
       }
