@@ -13,6 +13,8 @@ import { RecordComponent } from './record/record.component';
 import { DetailComponent } from './detail/detail.component';
 import { StatementComponent } from './statement/statement.component';
 import { FormsModule } from "@angular/forms";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatTableModule } from "@angular/material/table";
 
 const routes: Routes = [
   {path: 'gasto', component: AppComponent},
@@ -36,6 +38,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     FormsModule,
+    BrowserAnimationsModule,
+    MatTableModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),

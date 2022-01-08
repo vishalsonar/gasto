@@ -1,11 +1,11 @@
 import { CurrentUser } from "../entity/currentUser";
 import * as CryptoJS from 'crypto-js';
-import { Record } from "../entity/record";
 
 export class Utility {
 
-    public static PIN = '';
-    public static USER = 'user';
+    private static USER = 'user';
+    private static USER_ID: any = '';
+    private static CURRENT_USER = new CurrentUser();
 
     public static getSessionUser() {
         return sessionStorage.getItem(this.USER);
@@ -15,14 +15,26 @@ export class Utility {
         sessionStorage.setItem(this.USER, JSON.stringify(currentUser));
     }
 
-    public static getUID() {
-        let uid = null;
+    public static getCurrentUser() {
+        if (this.CURRENT_USER.getUID()) {
+            return this.CURRENT_USER;
+        }
+        let currentUser = new CurrentUser();
         const sessionUser = Utility.getSessionUser();
         if (sessionUser) {
             const user = JSON.parse(sessionUser);
-            uid = Utility.updateCurrentUser(new CurrentUser(), user).getUID();
+            currentUser = Utility.updateCurrentUser(currentUser, user);
         }
-        return uid;
+        return currentUser;
+    }
+
+    public static getUID() {
+        if (this.CURRENT_USER.getUID()) {
+            this.USER_ID = this.CURRENT_USER.getUID();
+        } else {
+            this.USER_ID = this.getCurrentUser().getUID();
+        }
+        return this.USER_ID;
     }
 
     public static updateCurrentUser(currentUser: CurrentUser, user: any) {
@@ -32,14 +44,26 @@ export class Utility {
     }
 
     public static encrypt(message: string) {
-        return CryptoJS.AES.encrypt(message, this.PIN).toString();
+        const key = CryptoJS.enc.Utf8.parse(this.getUID());
+        return CryptoJS.AES.encrypt(message, key, {
+            keySize: 16,
+            iv: key,
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString();
     }
 
     public static decrypt(message: string) {
-        return CryptoJS.AES.decrypt(message, this.PIN).toString();
+        const key = CryptoJS.enc.Utf8.parse(this.getUID());
+        return CryptoJS.AES.decrypt(message, key, {
+            keySize: 16,
+            iv: key,
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString(CryptoJS.enc.Utf8);
     }
 
-    public static validateNumber(message: string) {
+    public static isValidateNumber(message: string) {
        return !Number.isNaN(Number(message));
     }
 }

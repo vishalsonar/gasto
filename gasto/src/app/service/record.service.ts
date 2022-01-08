@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getFirestore, collection, getDocs, addDoc } from '@angular/fire/firestore';
+import { getFirestore, collection, getDocs, addDoc, query, where, documentId } from '@angular/fire/firestore';
 import { Utility } from './utility';
 import { Record } from '../entity/record';
 
@@ -8,24 +8,19 @@ import { Record } from '../entity/record';
 })
 export class RecordService {
 
-  private uid: any;
+  private collectionPath: string;
 
   constructor() { 
-    this.uid = Utility.getUID();
+    this.collectionPath = "/users/expense/" + Utility.getUID();
   }
 
   public insertRecord(record: Record) {
-    const userCollection = collection(getFirestore(), "/users/" + this.uid + "/" + record.getDate());
+    const userCollection = collection(getFirestore(), this.collectionPath);
     return addDoc(userCollection, record.convertToStoreData());
   }
 
-  public getAllRecord() {
-
+  public async getRecords() {
+    const userCollection = collection(getFirestore(), this.collectionPath);
+    return getDocs(userCollection);
   }
-
-  // getDocs(userCollection).then((result) => {
-    //   console.log(result.docs.map(doc => doc.data()));
-    // }).catch((error) => {
-
-    // });
 }

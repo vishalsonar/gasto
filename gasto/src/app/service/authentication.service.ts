@@ -32,11 +32,7 @@ export class AuthenticationService {
     if (this.auth.currentUser) {
       this.createCurrentUser();
     }
-    const sessionUser = Utility.getSessionUser();
-    if (sessionUser) {
-      const user = JSON.parse(sessionUser);
-      this.currentUser = Utility.updateCurrentUser(this.currentUser, user);
-    }
+    this.currentUser = Utility.getCurrentUser();
     return this.currentUser;
   }
 

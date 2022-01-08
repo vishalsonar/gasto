@@ -1,11 +1,12 @@
+import { Utility } from "../service/utility";
+
 export class Record {
 
-    private date?: string;
-    private time?: string;
+    private date?: Date;
     private latitude?: string;
     private longitude?: string;
     private amount?: string;
-    private comment?: string
+    private comment?: string;
 
     constructor() {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -16,10 +17,6 @@ export class Record {
 
     public getDate() {
         return this.date;
-    }
-
-    public getTime() {
-        return this.time;
     }
 
     public getLatitude() {
@@ -39,12 +36,7 @@ export class Record {
     }
 
     public build() {
-        const colon = ":";
-        const zero_zero = "00";
-        const hypen = "-";
-        const date = new Date();
-        this.date = (zero_zero + date.getDate()).slice(-2) + hypen + (zero_zero + (date.getMonth() + 1)).slice(-2) + hypen + date.getFullYear();
-        this.time = (zero_zero + date.getHours()).slice(-2) + colon + (zero_zero + date.getMinutes()).slice(-2) + colon + (zero_zero + date.getSeconds()).slice(-2);
+        this.date = new Date();
         return this;
     }
 
@@ -59,12 +51,37 @@ export class Record {
     }
 
     public convertToStoreData() {
-        return {
-            "time": this.time,
+        const data = {
+            "date": this.date,
             "latitude": this.latitude,
             "longitude": this.longitude,
             "amount": this.amount,
             "comment": this.comment
         };
+        return {
+            "data": Utility.encrypt(JSON.stringify(data))
+        };
+    }
+
+    public convertToDisplayRecord(record: string) {
+        const data = JSON.parse(Utility.decrypt(record));
+        if (data) {
+            this.date = new Date(data["date"]);
+            this.latitude = data["latitude"];
+            this.longitude = data["longitude"];
+            this.amount = data["amount"];
+            this.comment = data["comment"];
+        }
+        return this;
+    }
+
+    public inRange(startDate: Date, endDate: Date) {
+        let state: boolean = false;
+        if (this.date) {
+            if (startDate <= this.date && endDate >= this.date) {
+                state = true;
+            }
+        }
+        return state;
     }
 }
