@@ -15,6 +15,7 @@ import { StatementComponent } from './statement/statement.component';
 import { FormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from "@angular/material/table";
+import { CategoryComponent } from './category/category.component';
 
 const routes: Routes = [
   {path: 'gasto', component: AppComponent},
@@ -22,6 +23,7 @@ const routes: Routes = [
   {path: 'detail', component: DetailComponent},
   {path: 'home', component: HomeComponent},
   {path: 'statement', component: StatementComponent},
+  {path: 'category', component: CategoryComponent},
   {path: 'logout', redirectTo: '/gasto', pathMatch: 'full'},
   {path: '', redirectTo: '/gasto', pathMatch: 'full'}
 ];
@@ -33,7 +35,8 @@ const routes: Routes = [
     HomeComponent,
     RecordComponent,
     DetailComponent,
-    StatementComponent
+    StatementComponent,
+    CategoryComponent
   ],
   imports: [
     BrowserModule,

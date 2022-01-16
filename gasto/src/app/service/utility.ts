@@ -63,7 +63,12 @@ export class Utility {
         }).toString(CryptoJS.enc.Utf8);
     }
 
-    public static isValidateNumber(message: string) {
+    public static isNumeric(message: string): boolean {
        return !Number.isNaN(Number(message));
+    }
+
+    public static isAlphabetic(message: string): boolean {
+        // TODO
+        return true;
     }
 }

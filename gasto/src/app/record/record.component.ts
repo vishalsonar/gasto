@@ -28,7 +28,7 @@ export class RecordComponent {
   }
 
   public submit() {
-    if (Utility.isValidateNumber(this.amount)) {
+    if (Utility.isNumeric(this.amount)) {
       this.record.setAmount(this.amount);
       this.record.setComment(this.comment);
       this.recordService.insertRecord(this.record.build()).then((result) => {
