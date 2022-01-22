@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Record } from '../entity/record';
 import { RecordService } from '../service/record.service';
 import { Utility } from '../service/utility';
+import * as $ from 'jquery';
+import { CategoryService } from '../service/category.service';
 
 @Component({
   selector: 'app-record',
@@ -11,26 +13,38 @@ import { Utility } from '../service/utility';
 export class RecordComponent {
 
   public amount: string;
-  public comment: string;
-  private recordService: RecordService;
   private record: Record;
+  public category: string;
+  public categoryList: string[];
+  private recordService: RecordService;
+  private categoryService: CategoryService;
 
   constructor() {
     this.amount = '';
-    this.comment = '';
-    this.recordService = new RecordService();
+    this.category = '';
     this.record = new Record();
+    this.categoryList = ["Category"];
+    this.recordService = new RecordService();
+    this.categoryService = new CategoryService();
+    this.categoryService.getCategory().then(result => {
+      result.docs.forEach((docs) => {
+        this.categoryList = JSON.parse(Utility.decrypt(docs.data()["data"])).sort();
+        this.category = this.categoryList[0];
+      });
+    }).catch((error) => {
+
+    });
   }
 
   private reset() {
     this.amount = '';
-    this.comment = '';
+    this.category = '';
   }
 
   public submit() {
     if (Utility.isNumeric(this.amount)) {
       this.record.setAmount(this.amount);
-      this.record.setComment(this.comment);
+      this.record.setCategory(this.category);
       this.recordService.insertRecord(this.record.build()).then((result) => {
         this.reset();
         console.debug("RecordComponent :: submit :: Date Inserted Successfully");
@@ -40,6 +54,10 @@ export class RecordComponent {
     } else {
       console.error("RecordComponent :: submit :: Invalid amount");
     }
+  }
+
+  public selectedCategory(htmlElement: any) {
+    console.log(htmlElement);
   }
 
 }

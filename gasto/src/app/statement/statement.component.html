@@ -25,7 +25,7 @@
           <tr>
             <th class="sorted descending">DateTime</th>
             <th>Amount</th>
-            <th>Comment</th>
+            <th>Category</th>
             <th>Location</th>
           </tr>
         </thead>
@@ -33,7 +33,7 @@
           <tr *ngFor="let entry of recordList[currentPage]">
             <td>{{ formatDateTime(entry.getDate()) }}</td>
             <td>{{ entry.getAmount() }}</td>
-            <td>{{ entry.getComment() }}</td>
+            <td>{{ entry.getCategory() }}</td>
             <td>({{ entry.getLatitude() }}, {{ entry.getLongitude() }})</td>
           </tr>
         </tbody>

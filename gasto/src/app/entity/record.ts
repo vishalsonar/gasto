@@ -6,7 +6,7 @@ export class Record {
     private latitude?: string;
     private longitude?: string;
     private amount?: string;
-    private comment?: string;
+    private category?: string;
 
     constructor() {
         navigator.geolocation.getCurrentPosition((position) => {
@@ -31,8 +31,8 @@ export class Record {
         return this.amount;
     }
 
-    public getComment() {
-        return this.comment;
+    public getCategory() {
+        return this.category;
     }
 
     public build() {
@@ -45,8 +45,8 @@ export class Record {
         return this;
     }
 
-    public setComment(comment: string) {
-        this.comment = comment;
+    public setCategory(category: string) {
+        this.category = category;
         return this;
     }
 
@@ -56,7 +56,7 @@ export class Record {
             "latitude": this.latitude,
             "longitude": this.longitude,
             "amount": this.amount,
-            "comment": this.comment
+            "category": this.category
         };
         return {
             "data": Utility.encrypt(JSON.stringify(data))
@@ -70,7 +70,7 @@ export class Record {
             this.latitude = data["latitude"];
             this.longitude = data["longitude"];
             this.amount = data["amount"];
-            this.comment = data["comment"];
+            this.category = data["category"];
         }
         return this;
     }
