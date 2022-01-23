@@ -60,6 +60,10 @@ export class RecordComponent {
       showErrorMessage(Message.record_empty_amount);
       return;
     }
+    if (this.category.trim() == "") {
+      showErrorMessage(Message.record_empty_category);
+      return;
+    }
     if (Utility.isNumeric(this.amount)) {
       this.isDisable = true;
       this.record.setAmount(this.amount);

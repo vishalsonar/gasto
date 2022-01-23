@@ -21,12 +21,10 @@ export class StatisticsComponent {
     this.statistics = [];
     this.noDataFound = false;
     new StatisticsService().load().then((result) => {
+      this.loading = false;
       if (result.length == 0) {
-        this.loading = false;
         this.noDataFound = true;
       } else {
-        this.loading = false;
-        this.noDataFound = false;
         this.statistics = result;
       }
     }).catch((error) => {

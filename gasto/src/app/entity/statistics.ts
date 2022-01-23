@@ -48,7 +48,7 @@ export class Statistics {
         const statAmount = statistics.getAmount();
         if (this.amount && statAmount) {
             const total = parseFloat(this.amount) + parseFloat(statAmount);
-            this.amount = String(total);
+            this.amount = String(Math.round(total * 100) / 100);
         }
     }
 }

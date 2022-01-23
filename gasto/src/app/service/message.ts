@@ -7,6 +7,7 @@ export class Message {
     public static login_faliure = "Failed to login, Please Try again later";
 
     public static record_empty_amount = "Amount must not be empty";
+    public static record_empty_category = "Please select category";
     public static record_invalid_amount = "Amount must be a number e.g.: 12.21";
     public static record_insert_success = "Record inserted Successfully";
     public static record_insert_failure = "Error while inserting Record, Please try again later";
