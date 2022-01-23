@@ -8,12 +8,13 @@
         <h4 class="ui header">Amount</h4>
         <div class="ui labeled input">
           <label for="amount" class="ui label"><i class="money bill alternate outline icon"></i></label>
-          <input type="text" [(ngModel)]="amount" name="amount" spellcheck="false" data-ms-editor="true" maxlength="10">
+          <input class="width-194" id="amount" type="text" [(ngModel)]="amount" name="amount" spellcheck="false" data-ms-editor="true" maxlength="10">
         </div>
         <h4 class="ui header">Category</h4>
         <div class="ui labeled input">
           <label for="category" class="ui label"><i class="edit icon"></i></label>
-          <select [(ngModel)]="category" name="category" class="ui search dropdown">
+          <select id="category" [(ngModel)]="category" name="category" class="ui search dropdown">
+            <option value="" disabled>Select Category</option>
             <option *ngFor="let category of categoryList" value="{{ category }}">{{ category }}</option>
           </select>
         </div>

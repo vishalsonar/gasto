@@ -8,7 +8,7 @@
         <h4 class="ui header">Name</h4>
         <div class="ui labeled input">
           <label for="name" class="ui label"><i class="book icon"></i></label>
-          <input type="text" [(ngModel)]="name" name="name" spellcheck="false" data-ms-editor="true" maxlength="30">
+          <input class="width-194 uppercase" type="text" [(ngModel)]="name" name="name" spellcheck="false" data-ms-editor="true" maxlength="30">
         </div>
         <p class="button-padding">
             <button (click)="submit()" class="ui primary button">Submit</button>
@@ -16,15 +16,22 @@
           </p>
       </div>
       <div class="extra content">
+        <h4 class="ui header">Search</h4>
+        <div class="ui labeled input">
+          <label for="search" class="ui label"><i class="search icon"></i></label>
+          <input (keyup)="searchToken()" class="width-194 uppercase" type="text" [(ngModel)]="search" name="search" spellcheck="false" data-ms-editor="true" maxlength="30">
+        </div>
         <table class="ui sortable celled table">
             <thead>
               <tr>
                 <th class="sorted descending">Name</th>
+                <th>Remove</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let entry of category.getList()">
                 <td>{{ entry }}</td>
+                <td><button id="{{ entry }}" (click)="removeCategory($event.target)" class="ui button">Remove</button></td>
               </tr>
             </tbody>
           </table>    

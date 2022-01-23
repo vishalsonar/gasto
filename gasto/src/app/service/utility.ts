@@ -4,8 +4,21 @@ import * as CryptoJS from 'crypto-js';
 export class Utility {
 
     private static USER = 'user';
+    private static IS_REFRESH = 'isRefresh';
     private static USER_ID: any = '';
     private static CURRENT_USER = new CurrentUser();
+
+    public static setSessionRefresh(state: boolean) {
+        sessionStorage.setItem(this.IS_REFRESH, String(state));
+    }
+
+    public static getSessionRefresh() {
+        const state = sessionStorage.getItem(this.IS_REFRESH);
+        if (state) {
+            return Boolean(state);
+        }
+        return false;
+    }
 
     public static getSessionUser() {
         return sessionStorage.getItem(this.USER);

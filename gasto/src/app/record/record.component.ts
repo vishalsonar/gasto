@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Record } from '../entity/record';
 import { RecordService } from '../service/record.service';
 import { Utility } from '../service/utility';
-import * as $ from 'jquery';
 import { CategoryService } from '../service/category.service';
 
 @Component({
@@ -20,6 +19,7 @@ export class RecordComponent {
   private categoryService: CategoryService;
 
   constructor() {
+    this.refresh();
     this.amount = '';
     this.category = '';
     this.record = new Record();
@@ -39,6 +39,13 @@ export class RecordComponent {
   private reset() {
     this.amount = '';
     this.category = '';
+  }
+
+  private refresh() {
+    if (!Utility.getSessionRefresh()) {
+      Utility.setSessionRefresh(true);
+      window.location.reload();
+    }
   }
 
   public submit() {

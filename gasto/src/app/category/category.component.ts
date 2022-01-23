@@ -11,20 +11,25 @@ import { Utility } from '../service/utility';
 export class CategoryComponent {
 
   public name: string;
-  public category: Category;
+  public search: string;
   private documentRef: any;
+  public category: Category;
+  private categoryList: string[];
   private categoryService: CategoryService;
 
   constructor() {
     this.name = "";
+    this.search = "";
+    this.categoryList = [];
     this.category = new Category();
     this.categoryService = new CategoryService();
     this.categoryService.getCategory().then(result => {
-      const docs = result.docs.forEach((docs) => {
+      result.docs.forEach((docs) => {
         this.documentRef = docs.ref;
-        const data = JSON.parse(Utility.decrypt(docs.data()["data"]));
+        const data = JSON.parse(Utility.decrypt(docs.data()["data"])).sort();
         this.category.setList(data);
         this.category.setDoUpdate(true);
+        this.categoryList = data;
       });
     }).catch((error) => {
 
@@ -33,9 +38,37 @@ export class CategoryComponent {
 
   public submit() {
     if (Utility.isAlphabetic(this.name)) {
-      this.category.getList()?.push(this.name);
+      this.category.getList()?.push(this.name.toUpperCase());
       this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
         this.name = "";
+      }).catch((error) => {
+
+      });
+    }
+  }
+
+  public searchToken() {
+    const list = this.categoryList;
+    if (list) {
+      const trimToken = this.search.trim().toUpperCase();
+      if (trimToken == "") {
+        this.category.setList(this.categoryList);
+        return;
+      }
+      const filteredList = list.filter(element => element.includes(trimToken));
+        if (filteredList && filteredList.length != 0) {
+          this.category.setList(filteredList.sort());
+        }
+    }
+  }
+
+  public removeCategory(target: any) {
+    const list = this.categoryList.filter(element => element !== target.id);
+    if (list && list.length != 0) {
+      this.categoryList = list;
+      this.category.setList(list);
+      this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
+        
       }).catch((error) => {
 
       });
