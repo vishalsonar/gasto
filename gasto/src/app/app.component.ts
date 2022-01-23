@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
   public isDetailActive = false;
   public isStatementActive = false;
   public isCategoryActive = false;
+  public isStatisticsActive = false;
 
   private resetFlag() {
     this.isHomePageActive = false;
@@ -23,6 +24,7 @@ export class AppComponent implements OnInit {
     this.isDetailActive = false;
     this.isStatementActive = false;
     this.isCategoryActive = false;
+    this.isStatisticsActive = false;
   }
   
   constructor(private router: Router, private authentication: AuthenticationService,) { }
@@ -50,6 +52,10 @@ export class AppComponent implements OnInit {
         if (path['url'] == "/category") {
           this.resetFlag();
           this.isCategoryActive = true;
+        }
+        if (path['url'] == "/statistics") {
+          this.resetFlag();
+          this.isStatisticsActive = true;
         }
       }
     });

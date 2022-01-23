@@ -23,4 +23,6 @@ export class Message {
     public static category_name_already_present = "Category name already present, Please try different name";
     public static category_remove_success = "Category name removed Successfully";
     public static category_remove_failure = "Error while removing Category name, Please try again later";
+
+    public static statistics_load_failure = "Error while loading statistics data";
 }

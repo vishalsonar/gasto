@@ -1,0 +1,33 @@
+<div class="ui container padding-2-percentage">
+  <div class="ui card centered fluid">
+    <div class="content">
+      <div class="header">Statistics</div>
+    </div>
+    <div class="content">
+      <h4 *ngIf="loading" class="ui header">Loading...</h4>
+      <h4 *ngIf="noDataFound" class="ui header">No Data Found</h4>
+      <table class="ui celled table">
+        <tbody>
+          <tr *ngFor="let stat of statistics">
+            <td>
+              <div class="ui horizontal statistics">
+                <div class="statistic">
+                  <div class="text value">{{ stat.getName() }}</div>
+                  <div class="label">Category</div>
+                </div>
+                <div class="statistic">
+                  <div class="value">{{ stat.getCount() }}</div>
+                  <div class="label">Count</div>
+                </div>
+                <div class="statistic">
+                  <div class="value">&#8377;{{ stat.getAmount() }}</div>
+                  <div class="label">Amount</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

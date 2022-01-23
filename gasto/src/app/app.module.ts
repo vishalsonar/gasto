@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatTableModule } from "@angular/material/table";
 import { CategoryComponent } from './category/category.component';
 import { GlobalErrorHandlerService } from './service/global-error-handler-service.';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 const routes: Routes = [
   {path: 'gasto', component: AppComponent},
@@ -25,6 +26,7 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'statement', component: StatementComponent},
   {path: 'category', component: CategoryComponent},
+  {path: 'statistics', component: StatisticsComponent},
   {path: 'logout', redirectTo: '/gasto', pathMatch: 'full'},
   {path: '', redirectTo: '/gasto', pathMatch: 'full'}
 ];
@@ -37,7 +39,8 @@ const routes: Routes = [
     RecordComponent,
     DetailComponent,
     StatementComponent,
-    CategoryComponent
+    CategoryComponent,
+    StatisticsComponent
   ],
   imports: [
     BrowserModule,
