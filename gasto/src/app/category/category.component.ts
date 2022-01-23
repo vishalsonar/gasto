@@ -1,8 +1,12 @@
 import { Component } from '@angular/core';
-import { elementAt } from 'rxjs';
 import { Category } from '../entity/category';
 import { CategoryService } from '../service/category.service';
+import { Message } from '../service/message';
 import { Utility } from '../service/utility';
+
+declare function showSuccessMessage(message: any): any;
+declare function showErrorMessage(message: any): any;
+declare function showWarningMessage(message: any): any;
 
 @Component({
   selector: 'app-category',
@@ -15,7 +19,7 @@ export class CategoryComponent {
   public search: string;
   private documentRef: any;
   public category: Category;
-  public isSubmitDisabled: boolean;
+  public isDisabled: boolean;
   private categoryList: string[];
   private categoryService: CategoryService;
 
@@ -23,7 +27,7 @@ export class CategoryComponent {
     this.name = "";
     this.search = "";
     this.categoryList = [];
-    this.isSubmitDisabled = false;
+    this.isDisabled = false;
     this.category = new Category();
     this.categoryService = new CategoryService();
     this.categoryService.getCategory().then(result => {
@@ -35,20 +39,31 @@ export class CategoryComponent {
         this.categoryList = data;
       });
     }).catch((error) => {
-
+      showErrorMessage(Message.server_error);
     });
   }
 
   public submit() {
-    if (Utility.isAlphabetic(this.name) && !this.isNamePresent()) {
-      this.isSubmitDisabled = true;
-      this.category.getList()?.push(this.name.toUpperCase());
-      this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
-        this.name = "";
-        this.isSubmitDisabled = false;
-      }).catch((error) => {
-
-      });
+    if (this.name == null || this.name.trim() == "") {
+      showErrorMessage(Message.category_empty_name);
+      return;
+    }
+    if (Utility.isAlphabetic(this.name)) {
+      if (!this.isNamePresent()) {
+        this.isDisabled = true;
+        this.category.getList()?.push(this.name.toUpperCase());
+        this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
+          this.name = "";
+          this.isDisabled = false;
+          showSuccessMessage(Message.category_insert_success);
+        }).catch((error) => {
+          showErrorMessage(Message.category_insert_failure);
+        });
+      } else {
+        showErrorMessage(Message.category_name_already_present);
+      }
+    } else {
+      showErrorMessage(Message.category_invalid_name);
     }
   }
 
@@ -72,6 +87,8 @@ export class CategoryComponent {
       const filteredList = list.filter(element => element.includes(trimToken));
         if (filteredList && filteredList.length != 0) {
           this.category.setList(filteredList.sort());
+        } else {
+          showWarningMessage(Message.no_data_found);
         }
     }
   }
@@ -82,9 +99,9 @@ export class CategoryComponent {
       this.categoryList = list;
       this.category.setList(list);
       this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
-        
+        showSuccessMessage(Message.category_remove_success);
       }).catch((error) => {
-
+        showErrorMessage(Message.category_remove_failure);
       });
     }
   }

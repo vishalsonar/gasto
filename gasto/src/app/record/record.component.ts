@@ -19,7 +19,7 @@ export class RecordComponent {
   private record: Record;
   public category: string;
   public categoryList: string[];
-  public isSubmitDisable: boolean;
+  public isDisable: boolean;
   private recordService: RecordService;
   private categoryService: CategoryService;
 
@@ -27,7 +27,7 @@ export class RecordComponent {
     this.refresh();
     this.amount = '';
     this.category = '';
-    this.isSubmitDisable = false;
+    this.isDisable = false;
     this.record = new Record();
     this.categoryList = ["Category"];
     this.recordService = new RecordService();
@@ -45,7 +45,7 @@ export class RecordComponent {
   private reset() {
     this.amount = '';
     this.category = '';
-    this.isSubmitDisable = false;
+    this.isDisable = false;
   }
 
   private refresh() {
@@ -56,18 +56,22 @@ export class RecordComponent {
   }
 
   public submit() {
+    if (this.amount == null || this.amount.trim() == "") {
+      showErrorMessage(Message.record_empty_amount);
+      return;
+    }
     if (Utility.isNumeric(this.amount)) {
-      this.isSubmitDisable = true;
+      this.isDisable = true;
       this.record.setAmount(this.amount);
       this.record.setCategory(this.category);
       this.recordService.insertRecord(this.record.build()).then((result) => {
         this.reset();
-        showSuccessMessage("Record inserted Successfully");
+        showSuccessMessage(Message.record_insert_success);
       }).catch((error) => {
-        showErrorMessage("Error While Record Insert");
+        showErrorMessage(Message.record_insert_failure);
       });
     } else {
-      showErrorMessage("Invalid amount");
+      showErrorMessage(Message.record_invalid_amount);
     }
   }
 

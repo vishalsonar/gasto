@@ -14,8 +14,8 @@
           <input [(ngModel)]="fromDate" type="date" name="to">
         </div>
         <p class="button-padding">
-          <button (click)="submit()" class="ui primary button">Submit</button>
-          <button type="reset" class="ui button">Clear</button>
+          <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">Submit</button>
+          <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">Clear</button>
         </p>
       </form>
     </div>
