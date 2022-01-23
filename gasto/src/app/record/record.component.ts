@@ -3,6 +3,10 @@ import { Record } from '../entity/record';
 import { RecordService } from '../service/record.service';
 import { Utility } from '../service/utility';
 import { CategoryService } from '../service/category.service';
+import { Message } from '../service/message';
+
+declare function showSuccessMessage(message: any): any;
+declare function showErrorMessage(message: any): any;
 
 @Component({
   selector: 'app-record',
@@ -15,6 +19,7 @@ export class RecordComponent {
   private record: Record;
   public category: string;
   public categoryList: string[];
+  public isSubmitDisable: boolean;
   private recordService: RecordService;
   private categoryService: CategoryService;
 
@@ -22,6 +27,7 @@ export class RecordComponent {
     this.refresh();
     this.amount = '';
     this.category = '';
+    this.isSubmitDisable = false;
     this.record = new Record();
     this.categoryList = ["Category"];
     this.recordService = new RecordService();
@@ -32,13 +38,14 @@ export class RecordComponent {
         this.category = this.categoryList[0];
       });
     }).catch((error) => {
-
+      error(Message.server_error);
     });
   }
 
   private reset() {
     this.amount = '';
     this.category = '';
+    this.isSubmitDisable = false;
   }
 
   private refresh() {
@@ -50,21 +57,18 @@ export class RecordComponent {
 
   public submit() {
     if (Utility.isNumeric(this.amount)) {
+      this.isSubmitDisable = true;
       this.record.setAmount(this.amount);
       this.record.setCategory(this.category);
       this.recordService.insertRecord(this.record.build()).then((result) => {
         this.reset();
-        console.debug("RecordComponent :: submit :: Date Inserted Successfully");
+        showSuccessMessage("Record inserted Successfully");
       }).catch((error) => {
-        console.debug("RecordComponent :: submit :: Error While Date Insert");
+        showErrorMessage("Error While Record Insert");
       });
     } else {
-      console.error("RecordComponent :: submit :: Invalid amount");
+      showErrorMessage("Invalid amount");
     }
-  }
-
-  public selectedCategory(htmlElement: any) {
-    console.log(htmlElement);
   }
 
 }

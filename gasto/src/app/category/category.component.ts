@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { elementAt } from 'rxjs';
 import { Category } from '../entity/category';
 import { CategoryService } from '../service/category.service';
 import { Utility } from '../service/utility';
@@ -14,6 +15,7 @@ export class CategoryComponent {
   public search: string;
   private documentRef: any;
   public category: Category;
+  public isSubmitDisabled: boolean;
   private categoryList: string[];
   private categoryService: CategoryService;
 
@@ -21,6 +23,7 @@ export class CategoryComponent {
     this.name = "";
     this.search = "";
     this.categoryList = [];
+    this.isSubmitDisabled = false;
     this.category = new Category();
     this.categoryService = new CategoryService();
     this.categoryService.getCategory().then(result => {
@@ -37,14 +40,25 @@ export class CategoryComponent {
   }
 
   public submit() {
-    if (Utility.isAlphabetic(this.name)) {
+    if (Utility.isAlphabetic(this.name) && !this.isNamePresent()) {
+      this.isSubmitDisabled = true;
       this.category.getList()?.push(this.name.toUpperCase());
       this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
         this.name = "";
+        this.isSubmitDisabled = false;
       }).catch((error) => {
 
       });
     }
+  }
+
+  private isNamePresent() {
+    let state: boolean = false;
+    const findElement = this.categoryList.filter(element => element == this.name.toUpperCase());
+    if (findElement.length != 0) {
+      state = true;
+    }
+    return state;
   }
 
   public searchToken() {

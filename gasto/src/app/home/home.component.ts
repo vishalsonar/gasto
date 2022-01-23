@@ -1,6 +1,10 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../service/authentication.service';
 import { Router } from '@angular/router';
+import { Message } from '../service/message';
+
+declare function showSuccessMessage(message: any): any;
+declare function showErrorMessage(message: any): any;
 
 @Component({
   selector: 'app-home',
@@ -25,12 +29,13 @@ export class HomeComponent {
     this.authentication.loginOrSignUp().then((result) => {
       const user = this.authentication.getCurrentUser();
       if (user) {
+        showSuccessMessage(Message.login_success);
         this.router.navigate([this.nextPage]);
       } else {
-        console.error("AppComponent :: loginOrSignUp :: Error occured while fetching user info after login");
+        showErrorMessage(Message.login_faliure);
       }
     }).catch((error) => {
-      console.error("AppComponent :: loginOrSignUp :: Error occured while user login");
+      showErrorMessage(Message.login_faliure);
     });
   }
 

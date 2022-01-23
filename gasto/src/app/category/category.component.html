@@ -11,7 +11,7 @@
           <input class="width-194 uppercase" type="text" [(ngModel)]="name" name="name" spellcheck="false" data-ms-editor="true" maxlength="30">
         </div>
         <p class="button-padding">
-            <button (click)="submit()" class="ui primary button">Submit</button>
+            <button (click)="submit()" [disabled]="isSubmitDisabled" class="ui primary button">Submit</button>
             <button type="reset" class="ui button">Clear</button>
           </p>
       </div>

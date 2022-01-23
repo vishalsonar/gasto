@@ -81,7 +81,6 @@ export class Utility {
     }
 
     public static isAlphabetic(message: string): boolean {
-        // TODO
-        return true;
+        return /^[A-Za-z ]+$/.test(message);
     }
 }

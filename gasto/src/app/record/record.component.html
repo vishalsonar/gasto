@@ -20,7 +20,7 @@
         </div>
       </div>
       <div class="extra content">
-        <button (click)="submit()" class="ui primary button">Submit</button>
+        <button (click)="submit()" [disabled]="isSubmitDisable" class="ui primary button">Submit</button>
         <button type="reset" class="ui button">Clear</button>
       </div>
     </div>
