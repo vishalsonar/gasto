@@ -18,6 +18,7 @@
             <option *ngFor="let category of categoryList" value="{{ category }}">{{ category }}</option>
           </select>
         </div>
+        <p id="category">click <a href="category">here</a> to add category</p>
       </div>
       <div class="extra content">
         <button (click)="submit()" [disabled]="isDisable" class="ui primary button">Submit</button>

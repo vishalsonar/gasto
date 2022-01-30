@@ -7,9 +7,9 @@
 #logo {
   font-family: monospace;
   text-transform: uppercase;
-  letter-spacing: 5px;
+  letter-spacing: 2px;
   font-size: 40px;
-  padding: 1%;
+  padding-top: 2%;
   text-shadow: 1px 1px #424242;
 }
 
@@ -17,8 +17,7 @@
   padding: 2%;
 }
 
-html,
-body {
+html, body {
   height: 100%;
 }
 
