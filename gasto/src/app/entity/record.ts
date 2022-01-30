@@ -1,3 +1,4 @@
+import { Timestamp } from "firebase/firestore";
 import { Utility } from "../service/utility";
 
 export class Record {
@@ -59,7 +60,8 @@ export class Record {
             "category": this.category
         };
         return {
-            "data": Utility.encrypt(JSON.stringify(data))
+            "data": Utility.encrypt(JSON.stringify(data)),
+            "timestamp": Timestamp.now()
         };
     }
 
@@ -73,15 +75,5 @@ export class Record {
             this.category = data["category"];
         }
         return this;
-    }
-
-    public inRange(startDate: Date, endDate: Date) {
-        let state: boolean = false;
-        if (this.date) {
-            if (startDate <= this.date && endDate >= this.date) {
-                state = true;
-            }
-        }
-        return state;
     }
 }

@@ -13,9 +13,6 @@ declare function showWarningMessage(message: any): any;
 })
 export class StatementComponent {
 
-  private colon: string = ":";
-  private hypen: string = "-";
-  private zero_zero: string = "00";
   private rowListLength: number;
   private allRecordList: Record[];
   private recordService: RecordService;
@@ -58,8 +55,7 @@ export class StatementComponent {
   }
 
   public formatDateTime(date: Date) {
-    return (this.zero_zero + date.getDate()).slice(-2) + this.hypen + (this.zero_zero + (date.getMonth() + 1)).slice(-2) + this.hypen + date.getFullYear() + " "  + 
-           (this.zero_zero + date.getHours()).slice(-2) + this.colon + (this.zero_zero + date.getMinutes()).slice(-2) + this.colon + (this.zero_zero + date.getSeconds()).slice(-2);
+    return date.toLocaleDateString() + " " + date.toLocaleTimeString();
   }
 
   public submit() {
@@ -88,43 +84,42 @@ export class StatementComponent {
     let list: Record[][] = [];
     if (endDate >= startDate) {
       this.isDisabled = true;
-      for (let record in this.allRecordList) {
-        const entry: Record = this.allRecordList[record];
-        if (!entry.inRange(startDate, endDate)) {
-          continue;
-        }
-        if (list.length == 0) {
-          const firstChild = [];
-          firstChild.push(entry);
-          list.push(firstChild);
-          continue;
-        }
-        const child = list.pop();
-        if (child) {
-          if (child.length < this.rowListLength) {
-            child.push(entry);
-            list.push(child);
+      this.recordService.getRecordsByDate(startDate, endDate).then((result) => {
+        result.docs.forEach((snapshot) => {
+          const entry: Record = new Record().convertToDisplayRecord(snapshot.data()["data"]);
+          if (list.length == 0) {
+            const firstChild = [];
+            firstChild.push(entry);
+            list.push(firstChild);
           } else {
-            const newChild = [];
-            newChild.push(entry);
-            list.push(child, newChild);
-            const page = this.pagination.pop();
-            if (page) {
-              this.pagination.push(page, page + 1);
+            const child = list.pop();
+            if (child) {
+              if (child.length < this.rowListLength) {
+                child.push(entry);
+                list.push(child);
+              } else {
+                const newChild = [];
+                newChild.push(entry);
+                list.push(child, newChild);
+                const page = this.pagination.pop();
+                if (page) {
+                  this.pagination.push(page, page + 1);
+                }
+              }
             }
           }
+        });
+        if (list.length > 0) {
+          this.recordList = list;
+        } else {
+          showWarningMessage(Message.no_data_found);
         }
-      }
+        this.isDisabled = false;
+      });
     } else {
       showErrorMessage(Message.statement_from_greater_to_date);
       return;
     }
-    if (list.length > 0) {
-      this.recordList = list;
-    } else {
-      showWarningMessage(Message.no_data_found);
-    }
-    this.isDisabled = false;
   }
 
   public reset() {
