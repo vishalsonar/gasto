@@ -20,14 +20,16 @@ export class CategoryComponent {
   private documentRef: any;
   public category: Category;
   public isDisabled: boolean;
+  public notDataFound: boolean;
   private categoryList: string[];
   private categoryService: CategoryService;
 
   constructor() {
     this.name = "";
     this.search = "";
-    this.categoryList = [];
     this.isDisabled = false;
+    this.notDataFound = true;
+    this.categoryList = [];
     this.category = new Category();
     this.categoryService = new CategoryService();
     this.categoryService.getCategory().then(result => {
@@ -36,7 +38,7 @@ export class CategoryComponent {
         const data = JSON.parse(Utility.decrypt(docs.data()["data"])).sort();
         this.category.setList(data);
         this.category.setDoUpdate(true);
-        this.categoryList = data;
+        this.notDataFound = false;
       });
     }).catch((error) => {
       showErrorMessage(Message.server_error);
@@ -55,6 +57,7 @@ export class CategoryComponent {
         this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
           this.name = "";
           this.isDisabled = false;
+          this.notDataFound = false;
           showSuccessMessage(Message.category_insert_success);
         }).catch((error) => {
           showErrorMessage(Message.category_insert_failure);
@@ -69,40 +72,49 @@ export class CategoryComponent {
 
   private isNamePresent() {
     let state: boolean = false;
-    const findElement = this.categoryList.filter(element => element == this.name.toUpperCase());
-    if (findElement.length != 0) {
-      state = true;
+    const list = this.category.getList();
+    if (list) {
+      const findElement = list.filter(element => element == this.name.toUpperCase());
+      if (findElement.length != 0) {
+        state = true;
+      }
     }
     return state;
   }
 
   public searchToken() {
-    const list = this.categoryList;
-    if (list) {
+    const categoryList = this.category.getList();
+    if (categoryList) {
+      if (this.categoryList.length == 0) {
+        this.categoryList = categoryList;
+      }
       const trimToken = this.search.trim().toUpperCase();
       if (trimToken == "") {
         this.category.setList(this.categoryList);
         return;
       }
-      const filteredList = list.filter(element => element.includes(trimToken));
-        if (filteredList && filteredList.length != 0) {
-          this.category.setList(filteredList.sort());
-        } else {
-          showWarningMessage(Message.no_data_found);
-        }
+      const filteredList = this.categoryList.filter(element => element.includes(trimToken));
+      if (filteredList && filteredList.length != 0) {
+        this.category.setList(filteredList.sort());
+      } else {
+        showWarningMessage(Message.no_data_found);
+      }
     }
   }
 
   public removeCategory(target: any) {
-    const list = this.categoryList.filter(element => element !== target.id);
-    if (list && list.length != 0) {
-      this.categoryList = list;
+    const categoryList = this.category.getList();
+    if (categoryList) {
+      const list = categoryList.filter(element => element !== target.id);
       this.category.setList(list);
       this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
         showSuccessMessage(Message.category_remove_success);
       }).catch((error) => {
         showErrorMessage(Message.category_remove_failure);
       });
+      if (list && list.length == 0) {
+        this.notDataFound = true;
+      }
     }
   }
 }

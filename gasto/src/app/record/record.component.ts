@@ -34,7 +34,7 @@ export class RecordComponent {
     this.statMap = {};
     this.isDisable = false;
     this.record = new Record();
-    this.categoryList = ["Category"];
+    this.categoryList = [];
     this.recordService = new RecordService();
     this.categoryService = new CategoryService();
     this.statisticsService = new StatisticsService();

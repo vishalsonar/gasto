@@ -34,7 +34,8 @@
                 <td><button id="{{ entry }}" (click)="removeCategory($event.target)" class="ui button">Remove</button></td>
               </tr>
             </tbody>
-          </table>    
+          </table>
+          <h4 *ngIf="notDataFound">No Data Found</h4>  
       </div>
     </div>
   </form>
