@@ -1,5 +1,3 @@
-import { Utility } from "../service/utility";
-
 export class Statistics {
 
     private name?: string;
@@ -33,22 +31,10 @@ export class Statistics {
         return this.amount;
     }
 
-    public convertRecord(record: any) {
-        const data = JSON.parse(Utility.decrypt(record));
-        if (data) {
-            this.count = "1";
-            this.amount = data["amount"];
-            this.name = data["category"];
-        }
-        return this;       
-    }
-
-    public update(statistics: Statistics) {
-        this.count = String(Number(statistics.getCount()) + 1);
-        const statAmount = statistics.getAmount();
-        if (this.amount && statAmount) {
-            const total = parseFloat(this.amount) + parseFloat(statAmount);
-            this.amount = String(Math.round(total * 100) / 100);
-        }
+    public fromStoreData(statObject: any, category: string) {
+        this.name = category;
+        this.count = statObject["count"];
+        this.amount = statObject["amount"];
+        return this;
     }
 }
