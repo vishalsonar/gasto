@@ -9,11 +9,11 @@
           <img src="{{ getCurrentUser().getDisplayImage() }}" class="ui small circular image">
         </div>
         <div class="column">
-          <h4 class="ui header">Name: {{ getCurrentUser().getDisplayName() }}</h4>
-          <h4 class="ui header">Email: {{ getCurrentUser().getEmail() }}</h4>
-          <h4 class="ui header">UID: {{ getCurrentUser().getUID() }}</h4>
+          <h4 class="ui header"><i class="user circle icon"></i>{{ getCurrentUser().getDisplayName() }}</h4>
+          <h4 class="ui header"><i class="envelope icon"></i>{{ getCurrentUser().getEmail() }}</h4>
+          <h4 class="ui header"><i class="key icon"></i>{{ getCurrentUser().getUID() }}</h4>
           <h4 class="ui header" [innerHTML]="getCurrentUser().getDislpayEmailVerifiedAsIcon()"></h4>
-          <h4 class="ui header">Phone Number: {{ getCurrentUser().getPhoneNumber() }}</h4>
+          <h4 class="ui header"><i class="mobile icon"></i>{{ getCurrentUser().getPhoneNumber() != null ? getCurrentUser().getPhoneNumber() : 'Not Available' }}</h4>
         </div>
       </div>
     </div>

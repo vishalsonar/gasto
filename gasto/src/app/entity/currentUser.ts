@@ -74,13 +74,13 @@ export class CurrentUser {
     }
 
     public getDislpayEmailVerifiedAsIcon() {
-        let result = 'Email Verification: <i class="';
+        let result = '<i class="envelope open icon"></i>';
         if (this.emailVerified) {
-            result += 'check circle icon';
+            result += 'Email Verified Successfully';
         } else {
-            result += 'close icon icon';
+            result += 'Email Verification Failed';
         }
-        return result + '"></i>';
+        return result;
     }
 
     public getDisplayImage() {
