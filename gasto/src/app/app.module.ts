@@ -18,6 +18,7 @@ import { MatTableModule } from "@angular/material/table";
 import { CategoryComponent } from './category/category.component';
 import { GlobalErrorHandlerService } from './service/global-error-handler-service.';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { ReportComponent } from './report/report.component';
 
 const routes: Routes = [
   {path: 'gasto', component: AppComponent},
@@ -27,6 +28,7 @@ const routes: Routes = [
   {path: 'statement', component: StatementComponent},
   {path: 'category', component: CategoryComponent},
   {path: 'statistics', component: StatisticsComponent},
+  {path: 'report', component: ReportComponent},
   {path: 'logout', redirectTo: '/gasto', pathMatch: 'full'},
   {path: '', redirectTo: '/gasto', pathMatch: 'full'}
 ];
@@ -40,7 +42,8 @@ const routes: Routes = [
     DetailComponent,
     StatementComponent,
     CategoryComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    ReportComponent
   ],
   imports: [
     BrowserModule,

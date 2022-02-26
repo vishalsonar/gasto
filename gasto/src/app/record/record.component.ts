@@ -17,11 +17,11 @@ declare function showErrorMessage(message: any): any;
 export class RecordComponent {
 
   public amount: string;
-  private record: Record;
   public category: string;
-  public categoryList: string[];
   public isDisable: boolean;
+  public categoryList: string[];
   private statMap: any;
+  private record: Record;
   private documentRef: any;
   private recordService: RecordService;
   private categoryService: CategoryService;
@@ -32,9 +32,9 @@ export class RecordComponent {
     this.amount = '';
     this.category = '';
     this.statMap = {};
+    this.categoryList = [];
     this.isDisable = false;
     this.record = new Record();
-    this.categoryList = [];
     this.recordService = new RecordService();
     this.categoryService = new CategoryService();
     this.statisticsService = new StatisticsService();

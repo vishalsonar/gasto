@@ -8,12 +8,12 @@ import { Utility } from './utility';
 })
 export class AuthenticationService {
 
-  private provider: GoogleAuthProvider;
   private currentUser: CurrentUser;
+  private provider: GoogleAuthProvider;
 
   constructor(private auth: Auth) {
-    this.provider = new GoogleAuthProvider();
     this.currentUser = new CurrentUser();
+    this.provider = new GoogleAuthProvider();
   }
 
   public async loginOrSignUp(): Promise<any> {

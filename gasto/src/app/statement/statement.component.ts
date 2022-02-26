@@ -13,15 +13,16 @@ declare function showWarningMessage(message: any): any;
 })
 export class StatementComponent {
 
-  private rowListLength: number;
-  private allRecordList: Record[];
-  private recordService: RecordService;
-  public toDate: any;
-  public fromDate: any;
+  public startDate: any;
+  public endDate: any;
   public recordList: any;
   public currentPage: number;
   public pagination: number[];
   public isDisabled: boolean;
+  public isTableVisible: boolean;
+  private rowListLength: number;
+  private allRecordList: Record[];
+  private recordService: RecordService;
 
   constructor() {
     this.recordList = [];
@@ -30,6 +31,7 @@ export class StatementComponent {
     this.pagination = [1];
     this.allRecordList = [];
     this.isDisabled = false;
+    this.isTableVisible = false;
     this.recordService = new RecordService();
     this.recordService.getRecords().then((result) => {
       result.docs.map(doc => doc.data()).forEach((entry) => {
@@ -59,31 +61,32 @@ export class StatementComponent {
   }
 
   public submit() {
-    if (this.toDate == null) {
-      showErrorMessage(Message.statement_invalid_to_date);
+    if (this.startDate == null) {
+      showErrorMessage(Message.statement_invalid_start_date);
       return;
     }
-    if (this.fromDate == null) {
-      showErrorMessage(Message.statement_invalid_from_date);
+    if (this.endDate == null) {
+      showErrorMessage(Message.statement_invalid_end_date);
       return;
     }
-    const startDate = new Date(this.toDate);
-    const endDate = new Date(this.fromDate);
+    const startDate = new Date(this.startDate);
+    const endDate = new Date(this.endDate);
     if (startDate.toString() === 'Invalid Date') {
-      showErrorMessage(Message.statement_invalid_to_date);
+      showErrorMessage(Message.statement_invalid_start_date);
       return;
     }
     if (endDate.toString() === 'Invalid Date') {
-      showErrorMessage(Message.statement_invalid_from_date);
+      showErrorMessage(Message.statement_invalid_end_date);
       return;
     }
     if (endDate.toString() == startDate.toString()) {
-      showErrorMessage(Message.statement_from_greater_to_date);
+      showErrorMessage(Message.statement_end_greater_start_date);
       return;
     }
     let list: Record[][] = [];
     if (endDate >= startDate) {
       this.isDisabled = true;
+      this.isTableVisible = true;
       this.recordService.getRecordsByDate(startDate, endDate).then((result) => {
         result.docs.forEach((snapshot) => {
           const entry: Record = new Record().convertToDisplayRecord(snapshot.data()["data"]);
@@ -117,13 +120,13 @@ export class StatementComponent {
         this.isDisabled = false;
       });
     } else {
-      showErrorMessage(Message.statement_from_greater_to_date);
+      showErrorMessage(Message.statement_end_greater_start_date);
       return;
     }
   }
 
   public reset() {
-    this.toDate = null;
-    this.fromDate = null;
+    this.startDate = null;
+    this.endDate = null;
   }
 }

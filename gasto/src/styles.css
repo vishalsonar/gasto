@@ -33,3 +33,18 @@ body {
 .width-194 {
   width: 194px;
 }
+
+.button-padding-4-percent {
+  padding-top: auto;
+}
+
+@media screen and (max-width: 480px) {
+  .padding-2-percentage {
+    padding-top: 8%;
+    padding-bottom: 8%;
+  }
+
+  .button-padding-4-percent {
+    padding-top: 4%;
+  }
+}

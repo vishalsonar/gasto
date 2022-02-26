@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
   public isStatementActive = false;
   public isCategoryActive = false;
   public isStatisticsActive = false;
+  public isReportActive = false;
 
   private resetFlag() {
     this.isHomePageActive = false;
@@ -25,9 +26,10 @@ export class AppComponent implements OnInit {
     this.isStatementActive = false;
     this.isCategoryActive = false;
     this.isStatisticsActive = false;
+    this.isReportActive = false;
   }
   
-  constructor(private router: Router, private authentication: AuthenticationService,) { }
+  constructor(private router: Router, private authentication: AuthenticationService) { }
 
   ngOnInit(): void {
     this.router.events.subscribe(path => {
@@ -56,6 +58,10 @@ export class AppComponent implements OnInit {
         if (path['url'] == "/statistics") {
           this.resetFlag();
           this.isStatisticsActive = true;
+        }
+        if (path['url'] == "/report") {
+          this.resetFlag();
+          this.isReportActive = true;
         }
       }
     });

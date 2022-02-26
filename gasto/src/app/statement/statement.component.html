@@ -5,21 +5,21 @@
     </div>
     <div class="content">
       <form>
-        <h4 class="ui header">To Date: </h4>
+        <h4 class="ui header">Start Date: </h4>
         <div class="ui labeled input">
-          <input [(ngModel)]="toDate" type="date" name="to">
+          <input [(ngModel)]="startDate" type="date" name="to">
         </div>
-        <h4 class="ui header">From Date: </h4>
+        <h4 class="ui header">End Date: </h4>
         <div class="ui labeled input">
-          <input [(ngModel)]="fromDate" type="date" name="to">
+          <input [(ngModel)]="endDate" type="date" name="to">
         </div>
-        <p class="button-padding">
+        <p class="button-padding button-padding-4-percent">
           <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">Submit</button>
           <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">Clear</button>
         </p>
       </form>
     </div>
-    <div class="extra content">
+    <div class="extra content" *ngIf="isTableVisible">
       <table class="ui sortable celled table">
         <thead>
           <tr>

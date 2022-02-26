@@ -13,9 +13,9 @@ export class Message {
     public static record_insert_failure = "Error while inserting Record, Please try again later";
 
     public static statement_invalid_date = "Please select date";
-    public static statement_invalid_to_date = "Please select To Date";
-    public static statement_invalid_from_date = "Please select From Date";
-    public static statement_from_greater_to_date = "From Date must be older than To Date";
+    public static statement_invalid_start_date = "Please select Start Date";
+    public static statement_invalid_end_date = "Please select End Date";
+    public static statement_end_greater_start_date = "End Date must be older than Start Date";
 
     public static category_empty_name = "Category name must not be empty";
     public static category_insert_success = "Category name inserted Successfully";

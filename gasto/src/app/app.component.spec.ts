@@ -1,11 +1,17 @@
 import { TestBed } from '@angular/core/testing';
+import { NavigationStart, Router } from '@angular/router';
+import { MockComponent } from 'ng-mocks';
 import { AppComponent } from './app.component';
+import { AuthenticationService } from './service/authentication.service';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [
-        AppComponent
+        AppComponent,
+        MockComponent(AuthenticationService),
+        MockComponent(Router),
+        MockComponent(NavigationStart)
       ],
     }).compileComponents();
   });
@@ -16,16 +22,4 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'gasto'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app.title).toEqual('gasto');
-  });
-
-  it('should render title', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.querySelector('.content span')?.textContent).toContain('gasto app is running!');
-  });
 });

@@ -4,8 +4,8 @@ import * as CryptoJS from 'crypto-js';
 export class Utility {
 
     private static USER = 'user';
-    private static IS_REFRESH = 'isRefresh';
     private static USER_ID: any = '';
+    private static IS_REFRESH = 'isRefresh';
     private static CURRENT_USER = new CurrentUser();
 
     public static setSessionRefresh(state: boolean) {
