@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Record } from '../entity/record';
+import { i18n } from '../i18n/i18n';
 import { Message } from '../service/message';
 import { RecordService } from '../service/record.service';
 
@@ -13,6 +14,7 @@ declare function showWarningMessage(message: any): any;
 })
 export class ReportComponent {
 
+  public i18n: i18n;
   public startDate: any;
   public endDate: any;
   public isDisabled: boolean;
@@ -22,6 +24,7 @@ export class ReportComponent {
   public isTableVisible: boolean;
   
   constructor() { 
+    this.i18n = new i18n();
     this.isDisabled = false;
     this.dateAmountList = {};
     this.categoryAmountList = {};

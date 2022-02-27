@@ -7,6 +7,19 @@ export class Utility {
     private static USER_ID: any = '';
     private static IS_REFRESH = 'isRefresh';
     private static CURRENT_USER = new CurrentUser();
+    private static LANGUAGE = "language";
+
+    public static getLanguage(): string {
+        const language = sessionStorage.getItem(this.LANGUAGE);
+        if (language) {
+            return language;
+        }
+        return "en";
+    }
+
+    public static setLanguage(language: string) {
+        sessionStorage.setItem(this.LANGUAGE, language);
+    }
 
     public static setSessionRefresh(state: boolean) {
         sessionStorage.setItem(this.IS_REFRESH, String(state));

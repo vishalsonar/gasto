@@ -1,26 +1,26 @@
 <div class="ui container padding-2-percentage">
   <div class="ui card centered fluid">
     <div class="content">
-      <div class="header">Report</div>
+      <div class="header">{{ i18n.getText("6") }}</div>
     </div>
     <div class="content">
       <form>
-        <h4 class="ui header">Start Date: </h4>
+        <h4 class="ui header">{{ i18n.getText("21") }}: </h4>
         <div class="ui labeled input">
           <input [(ngModel)]="startDate" type="date" name="to">
         </div>
-        <h4 class="ui header">End Date: </h4>
+        <h4 class="ui header">{{ i18n.getText("22") }}: </h4>
         <div class="ui labeled input">
           <input [(ngModel)]="endDate" type="date" name="to">
         </div>
         <p class="button-padding button-padding-4-percent">
-          <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">Submit</button>
-          <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">Clear</button>
+          <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">{{ i18n.getText("16") }}</button>
+          <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">{{ i18n.getText("17") }}</button>
         </p>
       </form>
     </div>
     <div class="extra content" *ngIf="isTableVisible">
-      <h3 class="ui header">Date Amount Report</h3>
+      <h3 class="ui header">{{ i18n.getText("25") }}</h3>
       <table class="ui very basic table">
         <tbody>
           <tr *ngFor="let key of dateAmountList | keyvalue">
@@ -29,7 +29,7 @@
           </tr>
         </tbody>
       </table>
-      <h3 class="ui header">Category Amount Report</h3>
+      <h3 class="ui header">{{ i18n.getText("26") }}</h3>
       <table class="ui very basic table">
         <tbody>
           <tr *ngFor="let key of categoryAmountList | keyvalue">

@@ -2,21 +2,21 @@
   <form>
     <div class="ui card centered fluid">
       <div class="content">
-        <div class="header">Category</div>
+        <div class="header">{{ i18n.getText("11") }}</div>
       </div>
       <div class="content">
-        <h4 class="ui header">Name</h4>
+        <h4 class="ui header">{{ i18n.getText("30") }}</h4>
         <div class="ui labeled input">
           <label for="name" class="ui label"><i class="book icon"></i></label>
           <input class="width-194 uppercase" type="text" [(ngModel)]="name" name="name" spellcheck="false" data-ms-editor="true" maxlength="30">
         </div>
         <p class="button-padding button-padding-4-percent">
-            <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">Submit</button>
-            <button type="reset" [disabled]="isDisabled" class="ui button">Clear</button>
+            <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">{{ i18n.getText("16") }}</button>
+            <button type="reset" [disabled]="isDisabled" class="ui button">{{ i18n.getText("17") }}</button>
           </p>
       </div>
       <div class="extra content">
-        <h4 class="ui header">Search</h4>
+        <h4 class="ui header">{{ i18n.getText("31") }}</h4>
         <div class="ui labeled input">
           <label for="search" class="ui label"><i class="search icon"></i></label>
           <input (keyup)="searchToken()" class="width-194 uppercase" type="text" [(ngModel)]="search" name="search" spellcheck="false" data-ms-editor="true" maxlength="30">
@@ -24,18 +24,18 @@
         <table class="ui sortable celled table">
             <thead>
               <tr>
-                <th class="sorted descending">Name</th>
-                <th>Remove</th>
+                <th class="sorted descending">{{ i18n.getText("30") }}</th>
+                <th>{{ i18n.getText("32") }}</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let entry of category.getList()">
                 <td>{{ entry }}</td>
-                <td><button id="{{ entry }}" (click)="removeCategory($event.target)" class="ui button">Remove</button></td>
+                <td><button id="{{ entry }}" (click)="removeCategory($event.target)" class="ui button">{{ i18n.getText("32") }}</button></td>
               </tr>
             </tbody>
           </table>
-          <h4 *ngIf="notDataFound">No Data Found</h4>  
+          <h4 *ngIf="notDataFound">{{ i18n.getText("19") }}</h4>  
       </div>
     </div>
   </form>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Statistics } from '../entity/statistics';
+import { i18n } from '../i18n/i18n';
 import { Message } from '../service/message';
 import { StatisticsService } from '../service/statistics.service';
 
@@ -12,11 +13,13 @@ declare function showErrorMessage(message: any): any;
 })
 export class StatisticsComponent {
 
+  public i18n: i18n;
   public loading: boolean;
   public noDataFound: boolean;
   public statistics: Statistics[];
 
   constructor() {
+    this.i18n = new i18n();
     this.loading = true;
     this.statistics = [];
     this.noDataFound = false;

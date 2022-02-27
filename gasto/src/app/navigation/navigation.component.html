@@ -4,16 +4,16 @@
   </div>
 </div>
 <div class="ui fluid three item menu">
-  <a class="item" href="record"><i class="download icon"></i>Record</a>
+  <a class="item" href="record"><i class="download icon"></i>{{ i18n.getText("2") }}</a>
   <div class="ui simple dropdown item">
-    <i class="user icon"></i>User<i class="dropdown icon"></i>
+    <i class="user icon"></i>{{ i18n.getText("3") }}<i class="dropdown icon"></i>
     <div class="menu">
-      <a class="item" href="statistics"><i class="chart bar icon"></i>Statistics</a>
-      <a class="item" href="statement"><i class="file alternate icon"></i>Statement</a>
-      <a class="item" href="report"><i class="print icon"></i>Report</a>
-      <a class="item" href="detail"><i class="user circle icon"></i>User Details</a>
-      <a class="item" href="category"><i class="tag icon"></i>Add Category</a>
+      <a class="item" href="statistics"><i class="chart bar icon"></i>{{ i18n.getText("4") }}</a>
+      <a class="item" href="statement"><i class="file alternate icon"></i>{{ i18n.getText("5") }}</a>
+      <a class="item" href="report"><i class="print icon"></i>{{ i18n.getText("6") }}</a>
+      <a class="item" href="detail"><i class="user circle icon"></i>{{ i18n.getText("7") }}</a>
+      <a class="item" href="category"><i class="tag icon"></i>{{ i18n.getText("8") }}</a>
     </div>
   </div>
-  <a class="item" (click)="signOut()"><i class="power off icon"></i>Logout</a>
+  <a class="item" (click)="signOut()"><i class="power off icon"></i>{{ i18n.getText("9") }}</a>
 </div>

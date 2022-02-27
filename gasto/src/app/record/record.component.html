@@ -2,27 +2,27 @@
   <form>
     <div class="ui card centered fluid">
       <div class="content">
-        <div class="header">Record</div>
+        <div class="header">{{ i18n.getText("2") }}</div>
       </div>
       <div class="content">
-        <h4 class="ui header">Amount</h4>
+        <h4 class="ui header">{{ i18n.getText("10") }}</h4>
         <div class="ui labeled input">
           <label for="amount" class="ui label"><i class="money bill alternate outline icon"></i></label>
           <input class="width-194" id="amount" type="text" [(ngModel)]="amount" name="amount" spellcheck="false" data-ms-editor="true" maxlength="10">
         </div>
-        <h4 class="ui header">Category</h4>
+        <h4 class="ui header">{{ i18n.getText("11") }}</h4>
         <div class="ui labeled input">
           <label for="category" class="ui label"><i class="edit icon"></i></label>
           <select id="category" [(ngModel)]="category" name="category" class="ui search dropdown">
-            <option value="" disabled>Select Category</option>
+            <option value="" disabled>{{ i18n.getText("12") }}</option>
             <option *ngFor="let category of categoryList" value="{{ category }}">{{ category }}</option>
           </select>
         </div>
-        <p id="category">click <a href="category">here</a> to add category</p>
+        <p id="category">{{ i18n.getText("13") }} <a href="category">{{ i18n.getText("14") }}</a> {{ i18n.getText("15") }}</p>
       </div>
       <div class="extra content">
-        <button (click)="submit()" [disabled]="isDisable" class="ui primary button">Submit</button>
-        <button type="reset" [disabled]="isDisable" class="ui button">Clear</button>
+        <button (click)="submit()" [disabled]="isDisable" class="ui primary button">{{ i18n.getText("16") }}</button>
+        <button type="reset" [disabled]="isDisable" class="ui button">{{ i18n.getText("17") }}</button>
       </div>
     </div>
   </form>

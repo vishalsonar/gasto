@@ -5,6 +5,7 @@ import { Utility } from '../service/utility';
 import { CategoryService } from '../service/category.service';
 import { Message } from '../service/message';
 import { StatisticsService } from '../service/statistics.service';
+import { i18n } from '../i18n/i18n';
 
 declare function showSuccessMessage(message: any): any;
 declare function showErrorMessage(message: any): any;
@@ -16,6 +17,7 @@ declare function showErrorMessage(message: any): any;
 })
 export class RecordComponent {
 
+  public i18n: i18n;
   public amount: string;
   public category: string;
   public isDisable: boolean;
@@ -29,6 +31,7 @@ export class RecordComponent {
 
   constructor() {
     this.refresh();
+    this.i18n = new i18n();
     this.amount = '';
     this.category = '';
     this.statMap = {};

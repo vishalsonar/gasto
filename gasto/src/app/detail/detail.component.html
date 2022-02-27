@@ -1,7 +1,7 @@
 <div class="ui container padding-2-percentage">
   <div class="ui card centered fluid">
     <div class="content">
-      <div class="header">User Details</div>
+      <div class="header">{{ i18n.getText("7") }}</div>
     </div>
     <div class="content">
       <div class="ui one column grid container">
@@ -12,8 +12,8 @@
           <h4 class="ui header"><i class="user circle icon"></i>{{ getCurrentUser().getDisplayName() }}</h4>
           <h4 class="ui header"><i class="envelope icon"></i>{{ getCurrentUser().getEmail() }}</h4>
           <h4 class="ui header"><i class="key icon"></i>{{ getCurrentUser().getUID() }}</h4>
-          <h4 class="ui header" [innerHTML]="getCurrentUser().getDislpayEmailVerifiedAsIcon()"></h4>
-          <h4 class="ui header"><i class="mobile icon"></i>{{ getCurrentUser().getPhoneNumber() != null ? getCurrentUser().getPhoneNumber() : 'Not Available' }}</h4>
+          <h4 class="ui header" [innerHTML]="getDislpayEmailVerifiedAsIcon()"></h4>
+          <h4 class="ui header"><i class="mobile icon"></i>{{ getCurrentUser().getPhoneNumber() != null ? getCurrentUser().getPhoneNumber() : i18n.getText("27") }}</h4>
         </div>
       </div>
     </div>

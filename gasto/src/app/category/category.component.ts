@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Category } from '../entity/category';
+import { i18n } from '../i18n/i18n';
 import { CategoryService } from '../service/category.service';
 import { Message } from '../service/message';
 import { Utility } from '../service/utility';
@@ -15,6 +16,7 @@ declare function showWarningMessage(message: any): any;
 })
 export class CategoryComponent {
 
+  public i18n: i18n;
   public name: string;
   public search: string;
   private documentRef: any;
@@ -27,6 +29,7 @@ export class CategoryComponent {
   constructor() {
     this.name = "";
     this.search = "";
+    this.i18n = new i18n();
     this.isDisabled = false;
     this.notDataFound = true;
     this.categoryList = [];
@@ -107,6 +110,7 @@ export class CategoryComponent {
     if (categoryList) {
       const list = categoryList.filter(element => element !== target.id);
       this.category.setList(list);
+      this.categoryList = list;
       this.categoryService.insertOrUpdate(this.category, this.documentRef).then((result) => {
         showSuccessMessage(Message.category_remove_success);
       }).catch((error) => {

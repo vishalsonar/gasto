@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Record } from '../entity/record';
+import { i18n } from '../i18n/i18n';
 import { Message } from '../service/message';
 import { RecordService } from '../service/record.service';
 
@@ -15,6 +16,7 @@ export class StatementComponent {
 
   public startDate: any;
   public endDate: any;
+  public i18n: i18n;
   public recordList: any;
   public currentPage: number;
   public pagination: number[];
@@ -25,6 +27,7 @@ export class StatementComponent {
   private recordService: RecordService;
 
   constructor() {
+    this.i18n = new i18n();
     this.recordList = [];
     this.currentPage = 0;
     this.rowListLength = 20;

@@ -1,21 +1,21 @@
 <div class="ui container padding-2-percentage">
   <div class="ui card centered fluid">
     <div class="content">
-      <div class="header">Statement</div>
+      <div class="header">{{ i18n.getText("5") }}</div>
     </div>
     <div class="content">
       <form>
-        <h4 class="ui header">Start Date: </h4>
+        <h4 class="ui header">{{ i18n.getText("21") }}: </h4>
         <div class="ui labeled input">
           <input [(ngModel)]="startDate" type="date" name="to">
         </div>
-        <h4 class="ui header">End Date: </h4>
+        <h4 class="ui header">{{ i18n.getText("22") }}: </h4>
         <div class="ui labeled input">
           <input [(ngModel)]="endDate" type="date" name="to">
         </div>
         <p class="button-padding button-padding-4-percent">
-          <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">Submit</button>
-          <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">Clear</button>
+          <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">{{ i18n.getText("16") }}</button>
+          <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">{{ i18n.getText("17") }}</button>
         </p>
       </form>
     </div>
@@ -23,10 +23,10 @@
       <table class="ui sortable celled table">
         <thead>
           <tr>
-            <th class="sorted descending">DateTime</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Location</th>
+            <th class="sorted descending">{{ i18n.getText("23") }}</th>
+            <th>{{ i18n.getText("10") }}</th>
+            <th>{{ i18n.getText("11") }}</th>
+            <th>{{ i18n.getText("24") }}</th>
           </tr>
         </thead>
         <tbody>
