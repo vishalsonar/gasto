@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../service/authentication.service';
 import { Router } from '@angular/router';
-import { Message } from '../service/message';
 import { i18n } from '../i18n/i18n';
 import { Utility } from '../service/utility';
 
@@ -49,13 +48,13 @@ export class HomeComponent {
     this.authentication.loginOrSignUp().then((result) => {
       const user = this.authentication.getCurrentUser();
       if (user) {
-        showSuccessMessage(Message.login_success);
+        showSuccessMessage(this.i18n.getText("34"));
         this.router.navigate([this.nextPage]);
       } else {
-        showErrorMessage(Message.login_faliure);
+        showErrorMessage(this.i18n.getText("35"));
       }
     }).catch((error) => {
-      showErrorMessage(Message.login_faliure);
+      showErrorMessage(this.i18n.getText("35"));
     });
   }
 

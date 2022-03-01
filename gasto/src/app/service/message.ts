@@ -6,9 +6,6 @@ export class Message {
     public static server_error = Message.i18n.getText("33");
     public static no_data_found = Message.i18n.getText("19");
 
-    public static login_success = Message.i18n.getText("34");
-    public static login_faliure = Message.i18n.getText("35");
-
     public static record_empty_amount = Message.i18n.getText("36");
     public static record_empty_category = Message.i18n.getText("37");
     public static record_invalid_amount = Message.i18n.getText("38");
