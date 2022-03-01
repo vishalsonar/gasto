@@ -1,0 +1,50 @@
+/* You can add global styles to this file, and also import other style files */
+* {
+  padding: 0px;
+  margin: 0px;
+}
+
+#logo {
+  font-family: monospace;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 40px;
+  padding-top: 2%;
+  text-shadow: 1px 1px #424242;
+}
+
+.padding-2-percentage {
+  padding: 2%;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.button-padding {
+  padding-top: 1%;
+}
+
+.width-194 {
+  width: 194px;
+}
+
+.button-padding-4-percent {
+  padding-top: auto;
+}
+
+@media screen and (max-width: 480px) {
+  .padding-2-percentage {
+    padding-top: 8%;
+    padding-bottom: 8%;
+  }
+
+  .button-padding-4-percent {
+    padding-top: 4%;
+  }
+}

@@ -1,0 +1,33 @@
+<div class="ui container padding-2-percentage">
+  <div class="ui card centered fluid">
+    <div class="content">
+      <div class="header">{{ i18n.getText("4") }}</div>
+    </div>
+    <div class="content">
+      <h4 *ngIf="loading" class="ui header">{{ i18n.getText("18") }}...</h4>
+      <h4 *ngIf="noDataFound" class="ui header">{{ i18n.getText("19") }}</h4>
+      <table class="ui celled table">
+        <tbody>
+          <tr *ngFor="let stat of statistics">
+            <td>
+              <div class="ui horizontal statistics">
+                <div class="statistic">
+                  <div class="text value">{{ stat.getName() }}</div>
+                  <div class="label">{{ i18n.getText("11") }}</div>
+                </div>
+                <div class="statistic">
+                  <div class="value">{{ stat.getCount() }}</div>
+                  <div class="label">{{ i18n.getText("20") }}</div>
+                </div>
+                <div class="statistic">
+                  <div class="value">&#8377;{{ stat.getAmount() }}</div>
+                  <div class="label">{{ i18n.getText("10") }}</div>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

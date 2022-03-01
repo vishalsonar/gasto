@@ -1,0 +1,58 @@
+<div class="ui container padding-2-percentage">
+  <div class="ui card centered fluid">
+    <div class="content">
+      <div class="header">{{ i18n.getText("5") }}</div>
+    </div>
+    <div class="content">
+      <form>
+        <h4 class="ui header">{{ i18n.getText("21") }}: </h4>
+        <div class="ui labeled input">
+          <input [(ngModel)]="startDate" type="date" name="to">
+        </div>
+        <h4 class="ui header">{{ i18n.getText("22") }}: </h4>
+        <div class="ui labeled input">
+          <input [(ngModel)]="endDate" type="date" name="to">
+        </div>
+        <p class="button-padding button-padding-4-percent">
+          <button (click)="submit()" [disabled]="isDisabled" class="ui primary button">{{ i18n.getText("16") }}</button>
+          <button (click)="reset()" type="reset" [disabled]="isDisabled" class="ui button">{{ i18n.getText("17") }}</button>
+        </p>
+      </form>
+    </div>
+    <div class="extra content" *ngIf="isTableVisible">
+      <table class="ui sortable celled table">
+        <thead>
+          <tr>
+            <th class="sorted descending">{{ i18n.getText("23") }}</th>
+            <th>{{ i18n.getText("10") }}</th>
+            <th>{{ i18n.getText("11") }}</th>
+            <th>{{ i18n.getText("24") }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of recordList[currentPage]">
+            <td>{{ formatDateTime(entry.getDate()) }}</td>
+            <td>{{ entry.getAmount() }}</td>
+            <td>{{ entry.getCategory() }}</td>
+            <td>({{ entry.getLatitude() }}, {{ entry.getLongitude() }})</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="5">
+              <div class="ui right floated pagination menu">
+                <a class="icon item" (click)="prev()">
+                  <i class="left chevron icon"></i>
+                </a>
+                <a class="item" *ngFor="let page of pagination">{{ page }}</a>
+                <a class="icon item" (click)="next()">
+                  <i class="right chevron icon"></i>
+                </a>
+              </div>
+            </th>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+  </div>
+</div>
