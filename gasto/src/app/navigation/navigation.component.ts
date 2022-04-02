@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AuthenticationService } from '../service/authentication.service';
 import { Router } from '@angular/router';
 import { i18n } from '../i18n/i18n';
+import { Utility } from '../service/utility';
 
 @Component({
   selector: 'app-navigation',
@@ -16,7 +17,7 @@ export class NavigationComponent {
   constructor(private authentication: AuthenticationService, private router: Router) {
     this.title = "Gasto";
     this.i18n = new i18n();
-    if (!this.authentication.getCurrentUser().getUID()){
+    if (!this.authentication.getCurrentUser().getUID()) {
       this.router.navigate(['/logout']);
     }
   }

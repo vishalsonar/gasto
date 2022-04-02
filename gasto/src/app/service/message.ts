@@ -5,6 +5,7 @@ export class Message {
     public static i18n = new i18n();
     public static server_error = Message.i18n.getText("33");
     public static no_data_found = Message.i18n.getText("19");
+    public static unable_to_load_location = Message.i18n.getText("53");
 
     public static record_empty_amount = Message.i18n.getText("36");
     public static record_empty_category = Message.i18n.getText("37");

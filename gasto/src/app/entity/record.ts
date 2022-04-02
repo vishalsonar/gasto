@@ -1,5 +1,7 @@
 import { Timestamp } from "firebase/firestore";
+import { Message } from "../service/message";
 import { Utility } from "../service/utility";
+declare function showErrorMessage(message: any): any;
 
 export class Record {
 
@@ -10,9 +12,15 @@ export class Record {
     private category?: string;
 
     constructor() {
-        navigator.geolocation.getCurrentPosition((position) => {
+        this.loadLocation();
+    }
+
+    public async loadLocation() {
+        await navigator.geolocation.getCurrentPosition((position) => {
             this.latitude = position.coords.latitude.toString(); 
             this.longitude = position.coords.longitude.toString();
+        }, (error) => {
+            showErrorMessage(Message.unable_to_load_location);
         });
     }
 

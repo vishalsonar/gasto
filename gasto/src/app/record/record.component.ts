@@ -91,6 +91,7 @@ export class RecordComponent {
     }
     if (Utility.isNumeric(this.amount)) {
       this.isDisable = true;
+      this.record.loadLocation();
       this.record.setAmount(this.amount);
       this.record.setCategory(this.category);
       this.recordService.insertRecord(this.record.build()).then((result) => {

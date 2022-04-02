@@ -20,7 +20,7 @@ export class HomeComponent {
   public enFlag: boolean;
   public hiFlag: boolean;
   
-  constructor(private authentication: AuthenticationService, private router: Router){
+  constructor(private authentication: AuthenticationService, private router: Router) {
     this.i18n = new i18n();
     this.title = "Gasto";
     this.nextPage = "record";

@@ -213,6 +213,10 @@ export class i18n {
             "52": {
                 "en": "Error while loading statistics data",
                 "hi": "सांख्यिकी डेटा लोड करते समय समस्या"
+            },
+            "53": {
+                "en": "Unable to load location",
+                "hi": "स्थान लोड करने में असमर्थ"
             }
         }
     }
